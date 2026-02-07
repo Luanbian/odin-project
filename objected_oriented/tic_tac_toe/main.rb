@@ -8,3 +8,5 @@ class Main
     Game.new(HumanPlayer, ComputerPlayer).play
   end
 end
+
+Main.new
