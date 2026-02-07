@@ -19,10 +19,6 @@ class ComputerPlayer < Player
     random_prioritized_position
   end
 
-  def blocking_position
-    # code here
-  end
-
   def look_for_winning_or_blocking_position(opponent_marker)
     LINES.each { |line|
       markers = group_positions_by_markers(line)
@@ -30,13 +26,9 @@ class ComputerPlayer < Player
       if markers[self.marker].length == 2
         return markers[nil].first
       elsif markers[opponent_marker].length == 2
-        markers[nil].first
+        return markers[nil].first
       end
     }
-
-    if blocking_position
-      blocking_position
-    end
   end
 
   def corner_trap_defense_needed?
