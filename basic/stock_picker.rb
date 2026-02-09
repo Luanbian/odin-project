@@ -15,9 +15,7 @@ def stock_picker(prices)
       best_days = [min_price_day, today]
     end
 
-    if price < prices[min_price_day]
-      min_price_day = today
-    end
+    min_price_day = today if price < prices[min_price_day]
   end
 
   best_days

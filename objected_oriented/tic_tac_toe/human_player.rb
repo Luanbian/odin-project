@@ -7,11 +7,12 @@ class HumanPlayer < Player
       print "Select your #{marker} position: "
       selection = gets.to_i
       return selection if @game.free_positions.include?(selection)
+
       puts "Position #{selection} is not available, Try again."
     end
   end
 
   def to_s
-    "Human"
+    'Human'
   end
 end

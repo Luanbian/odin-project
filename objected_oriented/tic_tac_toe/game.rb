@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
-LINES =  [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
+LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
+
 class Game
   attr_reader :board, :current_player_id
 
   def initialize(player_1, player_2)
     @board = Array.new(10)
     @current_player_id = 0
-    @players = [player_1.new(self, "X"), player_2.new(self, "O")]
+    @players = [player_1.new(self, 'X'), player_2.new(self, 'O')]
     puts "#{current_player} goes first."
   end
 
@@ -29,7 +30,7 @@ class Game
   end
 
   def free_positions
-    (1..9).select {|position| @board[position].nil?}
+    (1..9).select { |position| @board[position].nil? }
   end
 
   def board_full?
@@ -38,7 +39,7 @@ class Game
 
   def player_has_won?(player)
     LINES.any? do |line|
-      line.all? {|position| @board[position] == player.marker}
+      line.all? { |position| @board[position] == player.marker }
     end
   end
 
@@ -61,11 +62,12 @@ class Game
   end
 
   def print_board
-    column_separator, row_separator = " | ", "--+--+--"
-    label_for_position = lambda{ |position| @board[position] ? @board[position] : position }
+    column_separator = ' | '
+    row_separator = '--+--+--'
+    label_for_position = ->(position) { @board[position] || position }
 
-    row_for_display = lambda{ |row| row.map(&label_for_position).join(column_separator) }
-    row_positions = [[1,2,3],[4,5,6],[7,8,9]]
+    row_for_display = ->(row) { row.map(&label_for_position).join(column_separator) }
+    row_positions = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
     rows_for_display = row_positions.map(&row_for_display)
     puts rows_for_display.join("\n" + row_separator + "\n")
   end

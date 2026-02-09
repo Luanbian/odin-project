@@ -22,26 +22,23 @@ class Hangman
     puts @secret_word
     puts "A palavra tem #{@secret_word.length} letras"
     puts "Você tem #{chances} chances"
-    puts @player_response.join(" ")
+    puts @player_response.join(' ')
   end
 
   def update_placeholder(guess)
     @secret_word.each_char.with_index do |char, index|
-      if char.eql?(guess)
-        @player_response[index] = char
-      end
+      @player_response[index] = char if char.eql?(guess)
     end
 
-    puts @player_response.join(" ")
+    puts @player_response.join(' ')
 
+    return if @player_response.any?(' _ ')
 
-    unless @player_response.any?(" _ ")
-      @is_finished = true
-    end
+    @is_finished = true
   end
 
   def decrease_chance
-    puts "Não tem essa letra, menos uma chance"
+    puts 'Não tem essa letra, menos uma chance'
     @chances -= 1
     puts "restam #{@chances} chances"
   end
@@ -59,13 +56,13 @@ class Hangman
     end
 
     puts "Acabaram suas chances, a resposta era #{@secret_word}" if @chances <= 0
-    puts "UAU, acertou a palavra na mosca!" if @is_finished
+    puts 'UAU, acertou a palavra na mosca!' if @is_finished
     puts "voce ganhou #{calculate_points} pontos"
   end
 
   def get_player_guess
     loop do
-      print "Select your guess: "
+      print 'Select your guess: '
       guess = gets.chomp.downcase.to_s
       return guess unless guess.empty?
     end
@@ -83,3 +80,4 @@ class Hangman
 end
 
 Hangman.new.play
+
